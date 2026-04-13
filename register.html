@@ -151,13 +151,17 @@
 <canvas id="particles"></canvas>
 
 <nav class="navbar">
-    <div class="container">
-        <a href="#" class="logo">
-            <div class="logo-img" style="background:var(--accent); display:flex; align-items:center; justify-content:center; color:var(--primary-dark); font-weight:900; font-size:1.5rem;">N</div>
-            <span>NARQA</span>
-        </a>
-        <a href="#" class="back-home"><i class="fas fa-arrow-left"></i> Back to Home</a>
-    </div>
+  <div class="container">
+    <a href="index.html" class="logo">
+      <img src="img/logo2.jpeg" alt="Narqa Academy" class="logo-img"
+        onerror="this.style.display='none'; this.parentElement.querySelector('.logo-fallback').style.display='flex';">
+      <div class="logo-fallback"
+        style="display:none; width:42px; height:42px; background:var(--accent); border-radius:50%; align-items:center; justify-content:center; font-weight:900; font-size:1.5rem; color:var(--primary-dark);">
+        N</div>
+      <span>NARQA</span>
+    </a>
+    <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> Back to Home</a>
+  </div>
 </nav>
 
 <section class="register-container">
