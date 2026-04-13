@@ -4,9 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Narqa Academy | Online Quran Memorization</title>
+    <meta name="description" content="Learn Quran online with certified Al-Azhar teachers. One-on-one sessions, flexible scheduling, and Ijaza certificates.">
+    <meta name="theme-color" content="#0F2E2F">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Narqa Academy">
+    <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
     <link rel="icon" href="img/logo2.jpeg" type="image/x-icon">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
         :root{
@@ -37,7 +44,7 @@
         .navbar.scrolled{padding:0.6rem 0;background:rgba(15,46,47,0.98);box-shadow:0 8px 32px rgba(0,0,0,0.3)}
         .navbar .container{display:flex;justify-content:space-between;align-items:center}
         .logo{display:flex;align-items:center;gap:0.75rem;text-decoration:none;font-weight:900;font-size:1.6rem;letter-spacing:0.04em;color:#fff}
-        .logo-img{width:46px;height:46px;border-radius:50%;object-fit:cover;border:2.5px solid var(--accent);transition:var(--transition);box-shadow:0 0 20px rgba(231,180,44,0.25)}
+        .logo-img{width:46px;height:46px;border-radius:50%;object-fit:cover;border:2.5px solid var(--accent);transition:var(--transition);box-shadow:0 0 20px rgba(231,180,44,0.25);background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.5rem;color:var(--primary-dark)}
         .logo:hover .logo-img{transform:rotate(8deg) scale(1.05);box-shadow:0 0 30px rgba(231,180,44,0.4)}
         .nav-links{display:flex;gap:2rem;list-style:none}
         .nav-links a{text-decoration:none;font-weight:600;color:rgba(255,255,255,0.7);transition:var(--transition);font-size:0.95rem;position:relative;padding-bottom:4px}
@@ -179,6 +186,8 @@
         .footer{background:var(--primary-dark);color:white;padding:3rem 0 1.5rem}
         .footer-bottom{text-align:center;border-top:1px solid rgba(255,255,255,0.06);padding-top:1.5rem;margin-top:2rem}
         .footer-bottom p{color:rgba(255,255,255,0.4);font-size:0.85rem}
+        .footer-bottom a{color:rgba(255,255,255,0.5);text-decoration:none;margin:0 0.8rem;font-size:0.8rem}
+        .footer-bottom a:hover{color:var(--accent)}
         .designer-card{background:linear-gradient(135deg,rgba(231,180,44,0.06),rgba(255,255,255,0.03));backdrop-filter:blur(8px);border-radius:1.8rem;padding:1.5rem;text-align:center;margin:2rem 0 1rem;border:1px solid rgba(231,180,44,0.12)}
         .designer-card h4{margin:0;font-weight:500;font-size:0.85rem;color:rgba(255,255,255,0.6)}
         .designer-card .dev-name{font-weight:800;font-size:1.1rem;color:#fff;margin:0.2rem 0}
@@ -192,6 +201,12 @@
         .toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--primary);color:white;padding:1rem 2rem;border-radius:1rem;font-weight:600;font-size:0.95rem;z-index:9999;opacity:0;transition:all 0.4s ease;box-shadow:0 10px 30px rgba(0,0,0,0.2);display:flex;align-items:center;gap:0.7rem}
         .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
         .toast i{color:var(--accent);font-size:1.2rem}
+
+        /* ===== PWA INSTALL BANNER ===== */
+        .install-banner{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(150px);background:var(--primary);color:white;padding:1rem 1.5rem;border-radius:3rem;display:flex;align-items:center;gap:1rem;box-shadow:0 10px 40px rgba(0,0,0,0.3);z-index:1000;transition:0.3s;border:1px solid var(--accent)}
+        .install-banner.show{transform:translateX(-50%) translateY(0)}
+        .install-banner button{background:var(--accent);border:none;padding:0.5rem 1.2rem;border-radius:2rem;font-weight:700;cursor:pointer;color:var(--primary-dark)}
+        .install-banner .close-install{background:transparent;color:white;font-size:1.2rem;padding:0;width:30px}
 
         /* ===== RESPONSIVE ===== */
         @media(max-width:900px){
@@ -212,10 +227,6 @@
             .container{padding:0 1.2rem}
             .section{padding:4rem 0}
         }
-
-        /* ===== MISC ===== */
-        @keyframes pulse-glow{0%,100%{box-shadow:0 0 20px rgba(231,180,44,0.2)}50%{box-shadow:0 0 40px rgba(231,180,44,0.35)}}
-        .no-sessions{color:var(--gray-700);font-style:italic;padding:2rem}
     </style>
 </head>
 <body>
@@ -224,7 +235,7 @@
     <nav class="navbar">
         <div class="container">
             <a href="#" class="logo">
-                <img src="img/logo2.jpeg" alt="Narqa Logo" class="logo-img">
+                <div class="logo-img"><img src="img/logo2.jpeg" alt="logo" style="width: 50px; height: 50px; border-radius: 50%;"></div>
                 <span>NARQA</span>
             </a>
             <ul class="nav-links">
@@ -233,7 +244,7 @@
                 <li><a href="#teachers">Teachers</a></li>
                 <li><a href="#schedule">Schedule</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li><a href="profile.html">Profile</a></li>
+                <li><a href="register.html">Register</a></li>
             </ul>
             <div class="header-controls">
                 <a href="login.html" class="btn btn-outline" style="margin-left:0.8rem">Login</a>
@@ -252,10 +263,17 @@
             <li><a href="#teachers">Teachers</a></li>
             <li><a href="#schedule">Schedule</a></li>
             <li><a href="#contact">Contact</a></li>
-            <li><a href="profile.html">Profile</a></li>
-            <li><a href="login.html">Login</a></li>
             <li><a href="register.html">Register</a></li>
+            <li><a href="login.html">Login</a></li>
         </ul>
+    </div>
+
+    <!-- ===== PWA INSTALL BANNER ===== -->
+    <div class="install-banner" id="installBanner">
+        <i class="fas fa-download" style="color:var(--accent);font-size:1.3rem"></i>
+        <span>Install Narqa Academy App</span>
+        <button id="installAppBtn">Install</button>
+        <button class="close-install" id="closeInstallBanner"><i class="fas fa-times"></i></button>
     </div>
 
     <!-- ===== HERO ===== -->
@@ -267,8 +285,8 @@
                 <h1>Learn Quran with<br><span>Elite Certified Teachers</span></h1>
                 <p>Personalized one-on-one sessions, progress tracking, and flexible scheduling — all in one powerful platform.</p>
                 <div class="hero-buttons">
-                    <a href="login.html" class="btn btn-primary"><i class="fas fa-rocket"></i> Start Free Trial</a>
-                    <a href="about-me.html" class="btn btn-outline"><i class="fas fa-play-circle"></i> Watch Demo</a>
+                    <a href="register.html" class="btn btn-primary"><i class="fas fa-rocket"></i> Start Free Trial</a>
+                    <a href="#" class="btn btn-outline"><i class="fas fa-play-circle"></i> Watch Demo</a>
                 </div>
                 <div class="hero-stats">
                     <div class="stat">
@@ -285,14 +303,17 @@
                     </div>
                 </div>
             </div>
-            <div class="hero-image">
-                <div class="hero-img-wrapper">
-                    <div class="hero-glow"></div>
-                    <img src="img/logo.jpeg" alt="Quran learning illustration">
-                    <div class="floating-card fc-1"><i class="fas fa-star"></i> 4.9 Rating</div>
-                    <div class="floating-card fc-2"><i class="fas fa-certificate"></i> Ijaza Certified</div>
-                </div>
-            </div>
+<div class="hero-image">
+  <div class="hero-img-wrapper">
+    <div class="hero-glow"></div>
+    <div
+      style="width:100%; height:400px; background:linear-gradient(135deg,var(--primary),var(--primary-light)); border-radius:2.5rem; border:3px solid var(--accent); overflow:hidden; display:flex; align-items:center; justify-content:center;">
+      <img src="img/logo2.jpeg" alt="Narqa Academy Logo" style="width:100%; height:100%; object-fit:cover;">
+    </div>
+    <div class="floating-card fc-1"><i class="fas fa-star"></i> 4.9 Rating</div>
+    <div class="floating-card fc-2"><i class="fas fa-certificate"></i> Ijaza Certified</div>
+  </div>
+</div>
         </div>
     </section>
 
@@ -350,24 +371,24 @@
             <div class="teachers-grid">
                 <div class="teacher-card reveal">
                     <div class="teacher-img">
-                        <img src="img/person.jpeg" alt="Teacher">
+                        <div class="logo-img" style="width:100%;height:100%;border-radius:0;font-size:5rem;background:var(--primary)">ش</div>
                         <div class="verified-badge"><i class="fas fa-check-circle"></i> Verified</div>
                     </div>
                     <div class="teacher-info">
                         <h3>Sheikh Abdurrahman Rady</h3>
                         <p class="teacher-qualification">Ijaza in Hafs 'an Asim, 15+ years experience</p>
-                        <a href="https://wa.me/01202988181?text=Hello%20Narqa%20I%20want%20to%20book" class="btn btn-primary" style="width:100%">Book Session</a>
+                        <button class="btn btn-primary" style="width:100%" onclick="bookTeacher()"><i class="fab fa-whatsapp"></i> Book Session</button>
                     </div>
                 </div>
                 <div class="teacher-card reveal">
                     <div class="teacher-img">
-                        <img src="img/logo2.jpeg" alt="Teacher">
+                        <div class="logo-img" style="width:100%;height:100%;border-radius:0;font-size:5rem;background:var(--primary-light)">أ</div>
                         <div class="verified-badge"><i class="fas fa-check-circle"></i> Verified</div>
                     </div>
                     <div class="teacher-info">
-                        <h3>More teachers coming soon</h3>
-                        <p class="teacher-qualification">New certified instructors joining weekly.</p>
-                        <button class="btn btn-dark-outline" style="width:100%" onclick="showToast('You will be notified when new teachers join!')">Notify me</button>
+                        <h3>Sheikh Ahmed El-Naggar</h3>
+                        <p class="teacher-qualification">Ijaza in 10 Qira'at, 12+ years experience</p>
+                        <button class="btn btn-primary" style="width:100%" onclick="bookTeacher()"><i class="fab fa-whatsapp"></i> Book Session</button>
                     </div>
                 </div>
             </div>
@@ -497,6 +518,8 @@
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 Narqa Academy. All rights reserved.</p>
+                <a href="terms.html">Terms & Conditions</a>
+                <a href="privacy.html">Privacy Policy</a>
             </div>
         </div>
     </footer>
@@ -509,7 +532,7 @@
 
     <script>
     (function(){
-        /* ===== TOAST ===== */
+        // ===== TOAST =====
         function showToast(msg){
             const t=document.getElementById('toast');
             document.getElementById('toastMsg').textContent=msg;
@@ -517,8 +540,9 @@
             setTimeout(()=>t.classList.remove('show'),3500);
         }
         window.showToast=showToast;
+        window.bookTeacher=()=>showToast('Redirecting to WhatsApp...')||window.open('https://wa.me/01202988181?text=Hello%20Narqa%20I%20want%20to%20book%20a%20session','_blank');
 
-        /* ===== PARTICLES ===== */
+        // ===== PARTICLES =====
         const canvas=document.getElementById('particles');
         const ctx=canvas.getContext('2d');
         let particles=[];
@@ -560,7 +584,7 @@
         }
         animateParticles();
 
-        /* ===== HERO COUNTER ===== */
+        // ===== HERO COUNTER =====
         document.querySelectorAll('.hero-stats .stat-number').forEach(el=>{
             const target=parseInt(el.dataset.count);
             let current=0;
@@ -572,7 +596,7 @@
             },30);
         });
 
-        /* ===== SCHEDULE ===== */
+        // ===== SCHEDULE =====
         const scheduleDB={
             saturday:[
                 {time:"09:00 - 10:00",teacher:"Sheikh Abdurrahman",level:"Beginner",type:"Memorization"},
@@ -607,14 +631,10 @@
                     <td>${s.teacher}</td>
                     <td><span class="level-badge ${getLevelClass(s.level)}">${s.level}</span></td>
                     <td>${s.type}</td>
-                    <td><button class="book-session-btn" onclick="bookSession('${s.time}','${s.teacher}')"><i class="fas fa-calendar-plus"></i> Book</button></td>
+                    <td><button class="book-session-btn" onclick="bookTeacher()"><i class="fas fa-calendar-plus"></i> Book</button></td>
                 </tr>
             `).join('');
         }
-        window.bookSession=function(time,teacher){
-            const msg=`Hello Narqa, I'd like to book a session at ${time} with ${teacher}`;
-            window.open(`https://wa.me/01202988181?text=${encodeURIComponent(msg)}`,'_blank');
-        };
         document.querySelectorAll('.tab-btn').forEach(btn=>{
             btn.addEventListener('click',()=>{
                 document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
@@ -624,7 +644,7 @@
         });
         renderSchedule('saturday');
 
-        /* ===== STATS COUNTER ===== */
+        // ===== STATS COUNTER =====
         const counters=[
             {id:"statStudents",target:580},
             {id:"statTeachers",target:22},
@@ -653,7 +673,7 @@
         const statsSection=document.querySelector('.stats-banner');
         if(statsSection)observer.observe(statsSection);
 
-        /* ===== SCROLL REVEAL ===== */
+        // ===== SCROLL REVEAL =====
         const revealObserver=new IntersectionObserver((entries)=>{
             entries.forEach((entry,i)=>{
                 if(entry.isIntersecting){
@@ -664,33 +684,34 @@
         },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
         document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
 
-        /* ===== MOBILE MENU ===== */
+        // ===== MOBILE MENU =====
         const menuToggle=document.getElementById('menuToggle');
         const mobileMenu=document.getElementById('mobileMenu');
         const closeMenuBtn=document.getElementById('closeMenu');
-        menuToggle.addEventListener('click',()=>mobileMenu.classList.add('active'));
-        closeMenuBtn.addEventListener('click',()=>mobileMenu.classList.remove('active'));
+        if(menuToggle)menuToggle.addEventListener('click',()=>mobileMenu.classList.add('active'));
+        if(closeMenuBtn)closeMenuBtn.addEventListener('click',()=>mobileMenu.classList.remove('active'));
         document.querySelectorAll('.mobile-menu a').forEach(link=>
             link.addEventListener('click',()=>mobileMenu.classList.remove('active'))
         );
 
-        /* ===== SCROLL EFFECTS ===== */
+        // ===== SCROLL EFFECTS =====
         const scrollBtn=document.getElementById('scrollTopBtn');
         const navbar=document.querySelector('.navbar');
         window.addEventListener('scroll',()=>{
-            scrollBtn.classList.toggle('visible',window.scrollY>400);
-            navbar.classList.toggle('scrolled',window.scrollY>50);
+            if(scrollBtn)scrollBtn.classList.toggle('visible',window.scrollY>400);
+            if(navbar)navbar.classList.toggle('scrolled',window.scrollY>50);
         });
-        scrollBtn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+        if(scrollBtn)scrollBtn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 
-        /* ===== FORM ===== */
-        document.getElementById('contactForm').addEventListener('submit',(e)=>{
+        // ===== FORM =====
+        const contactForm=document.getElementById('contactForm');
+        if(contactForm)contactForm.addEventListener('submit',(e)=>{
             e.preventDefault();
             showToast('Your message has been sent! We will contact you soon.');
             e.target.reset();
         });
 
-        /* ===== SMOOTH ANCHOR ===== */
+        // ===== SMOOTH ANCHOR =====
         document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
             anchor.addEventListener('click',function(e){
                 const href=this.getAttribute('href');
@@ -701,12 +722,45 @@
                 if(document.querySelector(href)){
                     e.preventDefault();
                     const el=document.querySelector(href);
-                    const offset=navbar.offsetHeight+20;
+                    const offset=navbar?navbar.offsetHeight+20:100;
                     const top=el.getBoundingClientRect().top+window.scrollY-offset;
                     window.scrollTo({top,behavior:'smooth'});
                 }
             });
         });
+
+        // ===== PWA INSTALL =====
+        let deferredPrompt;
+        const installBanner=document.getElementById('installBanner');
+        const installBtn=document.getElementById('installAppBtn');
+        const closeInstall=document.getElementById('closeInstallBanner');
+
+        window.addEventListener('beforeinstallprompt',(e)=>{
+            e.preventDefault();
+            deferredPrompt=e;
+            if(installBanner&&!localStorage.getItem('pwa-install-dismissed')){
+                setTimeout(()=>installBanner.classList.add('show'),2000);
+            }
+        });
+        if(installBtn){
+            installBtn.addEventListener('click',async()=>{
+                if(deferredPrompt){
+                    deferredPrompt.prompt();
+                    const {outcome}=await deferredPrompt.userChoice;
+                    if(outcome==='accepted')showToast('App installed successfully!');
+                    deferredPrompt=null;
+                    if(installBanner)installBanner.classList.remove('show');
+                }else{
+                    showToast('Your browser supports installation via menu');
+                }
+            });
+        }
+        if(closeInstall){
+            closeInstall.addEventListener('click',()=>{
+                installBanner.classList.remove('show');
+                localStorage.setItem('pwa-install-dismissed','true');
+            });
+        }
     })();
     </script>
 </body>
