@@ -492,16 +492,68 @@ html[dir="rtl"] .mobile-link { text-align: right; }
 /* ===== TESTIMONIALS ===== */
 .testimonials-section { padding: 120px 0; background: var(--bg); }
 .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+/* Photo-style testimonial cards */
 .testimonial-card {
-  padding: 32px 28px; border-radius: var(--radius-lg);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
   background: var(--bg-2); border: 1px solid var(--border);
   transition: all var(--transition);
+  display: flex; flex-direction: column;
 }
-.testimonial-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: var(--shadow-md); }
-.testimonial-quote { font-size: 36px; line-height: 1; color: var(--gold); margin-bottom: 14px; font-family: Georgia, serif; }
-.testimonial-text { font-size: 15px; color: var(--text-2); line-height: 1.75; margin-bottom: 24px; font-style: italic; }
-.testimonial-stars { display: flex; gap: 3px; margin-bottom: 18px; }
-.testimonial-author { display: flex; align-items: center; gap: 12px; }
+.testimonial-card:hover { border-color: var(--gold); transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+
+/* Student photo area */
+.testimonial-photo {
+  width: 100%; height: 220px;
+  position: relative; overflow: hidden;
+  background: linear-gradient(135deg, var(--emerald-dark), var(--emerald));
+  flex-shrink: 0;
+}
+.testimonial-photo img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform 0.5s ease;
+}
+.testimonial-card:hover .testimonial-photo img { transform: scale(1.05); }
+.testimonial-photo-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(7,40,28,0.7) 0%, transparent 55%);
+}
+.testimonial-photo-badge {
+  position: absolute; top: 14px; right: 14px;
+  background: rgba(212,175,55,0.92); color: #1a1000;
+  font-size: 11px; font-weight: 700; padding: 4px 10px;
+  border-radius: 100px; letter-spacing: 0.05em;
+  backdrop-filter: blur(4px);
+}
+.testimonial-photo-name {
+  position: absolute; bottom: 14px; left: 16px; right: 16px;
+}
+.testimonial-photo-name .t-name { font-size: 16px; font-weight: 700; color: #fff; }
+.testimonial-photo-name .t-origin { font-size: 12px; color: rgba(255,255,255,0.75); margin-top: 2px; }
+
+/* Card body */
+.testimonial-body { padding: 22px 24px 24px; flex: 1; display: flex; flex-direction: column; }
+.testimonial-stars { display: flex; gap: 3px; margin-bottom: 12px; }
+.testimonial-text {
+  font-size: 14px; color: var(--text-2); line-height: 1.75;
+  flex: 1; font-style: italic; position: relative; padding-left: 18px;
+}
+.testimonial-text::before {
+  content: '"'; position: absolute; left: 0; top: -4px;
+  font-size: 32px; line-height: 1; color: var(--gold);
+  font-family: Georgia, serif; opacity: 0.7;
+}
+.testimonial-course-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 16px; font-size: 11px; font-weight: 600;
+  color: var(--emerald); background: rgba(13,92,70,0.08);
+  padding: 5px 11px; border-radius: 100px;
+  border: 1px solid rgba(13,92,70,0.15); align-self: flex-start;
+}
+[data-theme="dark"] .testimonial-course-tag { color: var(--gold); background: rgba(212,175,55,0.1); border-color: rgba(212,175,55,0.2); }
+
+/* Fallback avatar (for cards without photo) */
 .testimonial-avatar {
   width: 44px; height: 44px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
@@ -509,6 +561,7 @@ html[dir="rtl"] .mobile-link { text-align: right; }
 }
 .testimonial-name { font-size: 15px; font-weight: 600; color: var(--text); }
 .testimonial-origin { font-size: 12px; color: var(--text-3); }
+.testimonial-quote { font-size: 36px; line-height: 1; color: var(--gold); margin-bottom: 14px; font-family: Georgia, serif; }
 
 /* ===== ABOUT ===== */
 .about-hero { padding: 160px 0 100px; background: var(--bg); }
@@ -748,12 +801,13 @@ footer {
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
-  .hero-inner { grid-template-columns: 1fr; gap: 60px; }
+  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
   .hero-visual { display: none; }
+  .hero-content { padding: 48px 0; }
   .features-grid { grid-template-columns: repeat(2, 1fr); }
   .courses-grid { grid-template-columns: repeat(2, 1fr); }
   .teachers-grid { grid-template-columns: repeat(2, 1fr); }
-  .pricing-grid { grid-template-columns: 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
   .pricing-card.featured { transform: none; }
   .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
   .about-content { grid-template-columns: 1fr; }
@@ -763,25 +817,91 @@ footer {
   .dashboard-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
   .contact-grid { grid-template-columns: 1fr; }
-  .cta-card { flex-direction: column; padding: 48px 40px; }
+  .cta-card { flex-direction: column; padding: 48px 40px; text-align: center; }
+  .cta-actions { justify-content: center; }
   .blog-grid { grid-template-columns: repeat(2, 1fr); }
+  .section-header { margin-bottom: 40px; }
 }
 
 @media (max-width: 768px) {
+  /* Nav */
   .nav-links, .nav-cta { display: none; }
   .hamburger { display: flex; }
-  .features-grid { grid-template-columns: 1fr; }
-  .courses-grid { grid-template-columns: 1fr; }
-  .teachers-grid { grid-template-columns: repeat(2, 1fr); }
-  .testimonials-grid { grid-template-columns: 1fr; }
+  .nav-actions { gap: 6px; }
+  .btn.btn-outline.btn-sm, .btn.btn-primary { display: none; }
+  .hamburger { display: flex !important; }
+
+  /* Hero */
+  .hero { min-height: auto; padding-bottom: 60px; }
+  .hero-content { padding: 32px 0 0; }
+  .hero-title { font-size: clamp(30px, 8vw, 42px); }
+  .hero-sub { font-size: 16px; }
+  .hero-cta { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .hero-cta .btn { width: 100%; justify-content: center; }
+  .hero-stats { flex-wrap: wrap; gap: 20px; padding-top: 28px; margin-top: 32px; }
+  .hero-stat-num { font-size: 22px; }
+
+  /* Sections */
+  .features-section, .courses-section, .teachers-section,
+  .testimonials-section, .pricing-section { padding: 72px 0; }
+  .features-grid { grid-template-columns: 1fr; gap: 16px; }
+  .feature-card { padding: 24px 20px; }
+  .courses-grid { grid-template-columns: 1fr; gap: 20px; }
+  .teachers-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .teacher-card { padding: 20px 16px; }
+  .testimonials-grid { grid-template-columns: 1fr; gap: 20px; }
   .blog-grid { grid-template-columns: 1fr; }
-  .dashboard-stats { grid-template-columns: repeat(2, 1fr); }
-  .hero-stats { flex-wrap: wrap; gap: 20px; }
-  .booking-form-card { padding: 28px 24px; }
-  .contact-form-card { padding: 28px 24px; }
-  .footer-grid { grid-template-columns: 1fr; }
-  .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+  .testimonial-photo { height: 200px; }
+
+  /* Pricing */
+  .pricing-grid { grid-template-columns: 1fr; max-width: 100%; }
+  .pricing-card { padding: 28px 24px; }
+
+  /* Dashboard */
+  .dashboard-stats { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .dash-stat { padding: 18px 16px; }
+  .dashboard-header-bar { padding: 20px 20px; flex-direction: column; align-items: flex-start; gap: 14px; }
+
+  /* Forms */
+  .booking-form-card { padding: 24px 20px; }
+  .contact-form-card { padding: 24px 20px; }
   .form-row { grid-template-columns: 1fr; }
+  .booking-grid { gap: 40px; }
+
+  /* CTA */
+  .cta-card { padding: 40px 28px; border-radius: var(--radius-lg); }
+  .cta-title { font-size: clamp(22px, 6vw, 32px); }
+  .cta-actions { flex-direction: column; width: 100%; }
+  .cta-actions .btn { width: 100%; justify-content: center; }
+
+  /* Footer */
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+  .footer-bottom-right { flex-wrap: wrap; justify-content: center; gap: 16px; }
+  footer { padding: 60px 0 32px; }
+
+  /* About */
+  .about-values { grid-template-columns: 1fr; gap: 12px; }
+  .page-hero { padding: 120px 0 60px; }
+  .page-hero-title { font-size: clamp(26px, 7vw, 40px); }
+  .page-hero-sub { font-size: 16px; }
+
+  /* Section headers */
+  .section-header { margin-bottom: 32px; }
+  .section-title { font-size: clamp(24px, 6vw, 36px); }
+  .section-subtitle { font-size: 15px; }
+}
+
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+  .teachers-grid { grid-template-columns: 1fr 1fr; }
+  .teacher-name { font-size: 14px; }
+  .hero-stats { gap: 16px; }
+  .hero-stat { flex: 1 1 calc(50% - 16px); }
+  .dashboard-stats { grid-template-columns: 1fr 1fr; }
+  .btn { font-size: 13px; padding: 12px 20px; }
+  .about-values { grid-template-columns: 1fr 1fr; }
+  .footer-social { flex-wrap: wrap; }
 }
 
 /* ===== RTL / LANGUAGE SWITCH ===== */
@@ -1164,45 +1284,65 @@ html[dir="rtl"] .hero-eyebrow { flex-direction: row-reverse; }
     <div class="container">
       <div class="section-header center">
         <div class="section-label" style="display:flex;justify-content:center"><span class="tag">Student Stories</span></div>
-        <h2 class="section-title">What our students say</h2>
+        <h2 class="section-title" data-i18n="testimonials.title">What our students say</h2>
+        <p class="section-subtitle" style="margin:0 auto;" data-i18n="testimonials.sub">Real results from real students around the world.</p>
       </div>
       <div class="testimonials-grid">
+
+        <!-- Card 1 -->
         <div class="testimonial-card animate-on-scroll">
-          <div class="testimonial-quote">"</div>
-          <div class="testimonial-text">I completed my Hifz after 3 years with Narqa Academy. Sheikh Hassan's patience and methodology made what seemed impossible, achievable. My family couldn't believe it.</div>
-          <div class="testimonial-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar" style="background:linear-gradient(135deg,#0D5C46,#127a5e)">AK</div>
-            <div>
-              <div class="testimonial-name">Ahmed Khalid</div>
-              <div class="testimonial-origin">London, United Kingdom</div>
+          <div class="testimonial-photo">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80&fit=crop&crop=face" alt="Ahmed Khalid" loading="lazy" />
+            <div class="testimonial-photo-overlay"></div>
+            <span class="testimonial-photo-badge">Hifz Graduate ✓</span>
+            <div class="testimonial-photo-name">
+              <div class="t-name">Ahmed Khalid</div>
+              <div class="t-origin">🇬🇧 London, United Kingdom</div>
             </div>
           </div>
-        </div>
-        <div class="testimonial-card animate-on-scroll">
-          <div class="testimonial-quote">"</div>
-          <div class="testimonial-text">As a revert with no Arabic background, I was nervous to start. Within 6 months I could read Quran independently. Ustadha Amina is extraordinary.</div>
-          <div class="testimonial-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar" style="background:linear-gradient(135deg,#1a3a6a,#2a5090)">SR</div>
-            <div>
-              <div class="testimonial-name">Sarah Reynolds</div>
-              <div class="testimonial-origin">Toronto, Canada</div>
-            </div>
+          <div class="testimonial-body">
+            <div class="testimonial-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+            <div class="testimonial-text">I completed my Hifz after 3 years with Narqa Academy. Sheikh Hassan's patience and methodology made what seemed impossible, achievable. My family couldn't believe it.</div>
+            <span class="testimonial-course-tag">📖 Quran Memorization (Hifz)</span>
           </div>
         </div>
+
+        <!-- Card 2 -->
         <div class="testimonial-card animate-on-scroll">
-          <div class="testimonial-quote">"</div>
-          <div class="testimonial-text">The flexibility is unmatched. I study between work shifts and still make consistent progress. The dashboard keeps me accountable. 10/10 recommend.</div>
-          <div class="testimonial-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar" style="background:linear-gradient(135deg,#4a2a1a,#7a4020)">YM</div>
-            <div>
-              <div class="testimonial-name">Yusuf Mohammed</div>
-              <div class="testimonial-origin">Dubai, UAE</div>
+          <div class="testimonial-photo">
+            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&q=80&fit=crop&crop=face" alt="Sarah Reynolds" loading="lazy" />
+            <div class="testimonial-photo-overlay"></div>
+            <span class="testimonial-photo-badge">Arabic Speaker ✓</span>
+            <div class="testimonial-photo-name">
+              <div class="t-name">Sarah Reynolds</div>
+              <div class="t-origin">🇨🇦 Toronto, Canada</div>
             </div>
           </div>
+          <div class="testimonial-body">
+            <div class="testimonial-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+            <div class="testimonial-text">As a revert with no Arabic background, I was nervous to start. Within 6 months I could read Quran independently. Ustadha Amina is extraordinary.</div>
+            <span class="testimonial-course-tag">🌿 Arabic for Beginners</span>
+          </div>
         </div>
+
+        <!-- Card 3 -->
+        <div class="testimonial-card animate-on-scroll">
+          <div class="testimonial-photo">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80&fit=crop&crop=face" alt="Yusuf Mohammed" loading="lazy" />
+            <div class="testimonial-photo-overlay"></div>
+            <span class="testimonial-photo-badge">Active Student ✓</span>
+            <div class="testimonial-photo-name">
+              <div class="t-name">Yusuf Mohammed</div>
+              <div class="t-origin">🇦🇪 Dubai, UAE</div>
+            </div>
+          </div>
+          <div class="testimonial-body">
+            <div class="testimonial-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+            <div class="testimonial-text">The flexibility is unmatched. I study between work shifts and still make consistent progress. The dashboard keeps me accountable. 10/10 recommend.</div>
+            <span class="testimonial-course-tag">🎯 Tajweed Rules</span>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -2137,6 +2277,9 @@ const I18N = {
     en: '$59<span style="font-size:14px;font-weight:400;color:var(--text-3)">/mo</span>',
     ar: '<span dir="ltr">900</span> ج.م<span style="font-size:14px;font-weight:400;color:var(--text-3)">/شهر</span>'
   },
+
+  'testimonials.title': { en: 'What our students say', ar: 'ماذا يقول طلابنا' },
+  'testimonials.sub': { en: 'Real results from real students around the world.', ar: 'نتائج حقيقية من طلاب حقيقيين حول العالم.' },
 
   'footer.desc': {
     en: 'Authentic Islamic education for every Muslim, everywhere. Join 12,000+ students learning Quran, Arabic, and Islamic Sciences with certified scholars.',
