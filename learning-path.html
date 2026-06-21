@@ -211,6 +211,9 @@
         .reveal.visible{opacity:1;transform:translateY(0)}
 
         /* ===== RESPONSIVE ===== */
+        @media(max-width:1200px){
+            .pricing-grid{grid-template-columns:repeat(3,1fr)}
+        }
         @media(max-width:768px){
             .container{padding:0 1.2rem}
             .hero{padding:130px 0 50px}
@@ -220,7 +223,170 @@
             .path-top{padding:2rem 1.5rem 1.2rem}
             .path-body{padding:0 1.5rem}
             .path-bottom{padding:1.2rem 1.5rem}
+            .pricing-grid{grid-template-columns:repeat(2,1fr)}
+            .pricing-tabs{gap:0.4rem}
+            .pricing-tab{padding:0.5rem 1.1rem;font-size:0.8rem}
         }
+        /* ===== PRICING SECTION ===== */
+        .pricing-section{padding:90px 0;position:relative;z-index:1}
+
+        /* Duration Tabs */
+        .pricing-tabs{display:flex;justify-content:center;gap:0.5rem;margin-bottom:3rem;flex-wrap:wrap}
+        .pricing-tab{
+            padding:0.6rem 1.6rem;border-radius:2rem;font-weight:700;font-size:0.85rem;
+            cursor:pointer;border:1px solid rgba(255,255,255,0.1);
+            background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.5);
+            transition:var(--transition);letter-spacing:0.03em;
+        }
+        .pricing-tab:hover{border-color:rgba(231,180,44,0.3);color:rgba(255,255,255,0.8)}
+        .pricing-tab.active{
+            background:linear-gradient(135deg,var(--accent),#f0c840);
+            color:var(--primary-dark);border-color:transparent;
+            box-shadow:0 4px 18px rgba(231,180,44,0.3);
+        }
+
+        /* Duration Group */
+        .pricing-group{display:none}
+        .pricing-group.active{display:block}
+
+        .pricing-group-header{
+            text-align:center;margin-bottom:2rem;
+        }
+        .pricing-duration-badge{
+            display:inline-flex;align-items:center;gap:0.5rem;
+            background:rgba(231,180,44,0.08);border:1px solid rgba(231,180,44,0.15);
+            color:var(--accent);padding:0.5rem 1.4rem;border-radius:2rem;
+            font-weight:800;font-size:0.85rem;letter-spacing:0.06em;text-transform:uppercase;
+            margin-bottom:0.6rem;
+        }
+        .pricing-group-desc{color:rgba(255,255,255,0.35);font-size:0.9rem}
+
+        /* Cards Grid */
+        .pricing-grid{
+            display:grid;
+            grid-template-columns:repeat(5,1fr);
+            gap:1.2rem;
+        }
+
+        /* Pricing Card */
+        .pricing-card{
+            background:rgba(255,255,255,0.025);
+            border:1px solid rgba(255,255,255,0.06);
+            border-radius:1.6rem;
+            padding:1.8rem 1.4rem 1.5rem;
+            display:flex;flex-direction:column;
+            position:relative;overflow:hidden;
+            transition:var(--transition);
+            text-align:center;
+        }
+        .pricing-card::before{
+            content:'';position:absolute;top:0;left:0;right:0;height:2px;
+            background:linear-gradient(90deg,transparent,rgba(231,180,44,0.2),transparent);
+            transition:var(--transition);
+        }
+        .pricing-card:hover{
+            transform:translateY(-8px);
+            border-color:rgba(231,180,44,0.15);
+            box-shadow:0 20px 48px -12px rgba(0,0,0,0.45);
+        }
+        .pricing-card:hover::before{
+            background:linear-gradient(90deg,transparent,var(--accent),transparent);
+        }
+
+        /* Featured Card */
+        .pricing-card.featured{
+            background:rgba(231,180,44,0.07);
+            border-color:rgba(231,180,44,0.25);
+            box-shadow:0 8px 32px rgba(231,180,44,0.1);
+        }
+        .pricing-card.featured::before{
+            background:linear-gradient(90deg,transparent,var(--accent),transparent);
+        }
+        .pricing-card.featured:hover{
+            border-color:rgba(231,180,44,0.45);
+            box-shadow:0 24px 56px rgba(231,180,44,0.18);
+        }
+
+        /* Best Value Badge */
+        .pricing-badge-wrap{min-height:26px;margin-bottom:0.8rem}
+        .pricing-best{
+            display:inline-flex;align-items:center;gap:0.3rem;
+            background:linear-gradient(135deg,var(--accent),#f0c840);
+            color:var(--primary-dark);padding:0.25rem 0.9rem;
+            border-radius:2rem;font-weight:800;font-size:0.68rem;
+            letter-spacing:0.05em;text-transform:uppercase;
+            box-shadow:0 4px 14px rgba(231,180,44,0.3);
+        }
+
+        /* Card Content */
+        .pricing-sessions{
+            font-size:2rem;font-weight:900;line-height:1;margin-bottom:0.2rem;
+            background:linear-gradient(135deg,#fff,rgba(255,255,255,0.75));
+            -webkit-background-clip:text;background-clip:text;color:transparent;
+        }
+        .pricing-sessions-label{color:rgba(255,255,255,0.3);font-size:0.78rem;font-weight:600;margin-bottom:1.2rem;text-transform:uppercase;letter-spacing:0.06em}
+
+        .pricing-divider{
+            width:40px;height:1px;background:rgba(255,255,255,0.08);
+            margin:0 auto 1.2rem;
+        }
+        .pricing-card.featured .pricing-divider{background:rgba(231,180,44,0.2)}
+
+        .pricing-duration-tag{
+            display:inline-flex;align-items:center;gap:0.4rem;
+            background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);
+            color:rgba(255,255,255,0.45);padding:0.3rem 0.8rem;
+            border-radius:0.6rem;font-size:0.78rem;font-weight:600;
+            margin-bottom:1.4rem;
+        }
+        .pricing-card.featured .pricing-duration-tag{
+            background:rgba(231,180,44,0.08);border-color:rgba(231,180,44,0.15);
+            color:var(--accent);
+        }
+
+        .pricing-price-wrap{margin-bottom:1.5rem;flex:1;display:flex;flex-direction:column;justify-content:flex-end}
+        .pricing-price{
+            font-size:2.2rem;font-weight:900;line-height:1;
+            color:#fff;margin-bottom:0.2rem;
+        }
+        .pricing-card.featured .pricing-price{
+            background:linear-gradient(135deg,var(--accent),#f0d060);
+            -webkit-background-clip:text;background-clip:text;color:transparent;
+        }
+        .pricing-price .pricing-cur{font-size:1.1rem;vertical-align:super;margin-right:0.05rem;font-weight:700}
+        .pricing-per{color:rgba(255,255,255,0.25);font-size:0.78rem;margin-top:0.2rem}
+
+        /* CTA Button */
+        .pricing-cta{
+            display:block;width:100%;padding:0.75rem;border-radius:1rem;
+            font-weight:700;font-size:0.85rem;text-align:center;
+            border:1px solid rgba(255,255,255,0.1);
+            background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.6);
+            cursor:pointer;transition:var(--transition);text-decoration:none;
+            font-family:inherit;
+        }
+        .pricing-cta:hover{
+            background:rgba(255,255,255,0.1);color:#fff;
+            border-color:rgba(255,255,255,0.18);
+            transform:translateY(-2px);
+        }
+        .pricing-card.featured .pricing-cta{
+            background:linear-gradient(135deg,var(--accent),#f0c840);
+            color:var(--primary-dark);border-color:transparent;
+            box-shadow:0 4px 18px rgba(231,180,44,0.25);
+        }
+        .pricing-card.featured .pricing-cta:hover{
+            box-shadow:0 8px 28px rgba(231,180,44,0.4);
+        }
+
+        /* Savings note */
+        .pricing-savings{
+            margin-top:2.5rem;text-align:center;
+            color:rgba(255,255,255,0.25);font-size:0.82rem;
+            display:flex;align-items:center;justify-content:center;gap:0.6rem;
+        }
+        .pricing-savings i{color:var(--accent);opacity:0.6}
+
         @media(max-width:480px){
             .steps-grid{grid-template-columns:1fr}
             .path-price{font-size:1.7rem}
@@ -292,7 +458,7 @@
                     </div>
                 </div>
                 <div class="path-bottom">
-                    <div class="path-price"><span class="cur">EGP</span> 400 <span class="per">/month</span></div>
+                    <div class="path-price"><span class="cur">$</span>65 <span class="per">/month</span></div>
                     <button class="btn btn-gold select-path"><i class="fas fa-graduation-cap"></i> Choose This Path</button>
                 </div>
             </div>
@@ -323,7 +489,7 @@
                     </div>
                 </div>
                 <div class="path-bottom">
-                    <div class="path-price"><span class="cur">EGP</span> 300 <span class="per">/month</span></div>
+                    <div class="path-price"><span class="cur">$</span>49 <span class="per">/month</span></div>
                     <button class="btn btn-gold select-path"><i class="fas fa-graduation-cap"></i> Choose This Path</button>
                 </div>
             </div>
@@ -354,7 +520,7 @@
                     </div>
                 </div>
                 <div class="path-bottom">
-                    <div class="path-price"><span class="cur">EGP</span> 250 <span class="per">/month</span></div>
+                    <div class="path-price"><span class="cur">$</span>39 <span class="per">/month</span></div>
                     <button class="btn btn-gold select-path"><i class="fas fa-graduation-cap"></i> Choose This Path</button>
                 </div>
             </div>
@@ -385,7 +551,7 @@
                     </div>
                 </div>
                 <div class="path-bottom">
-                    <div class="path-price"><span class="cur">EGP</span> 500 <span class="per">/month</span></div>
+                    <div class="path-price"><span class="cur">$</span>79 <span class="per">/month</span></div>
                     <button class="btn btn-gold select-path"><i class="fas fa-graduation-cap"></i> Choose This Path</button>
                 </div>
             </div>
@@ -420,7 +586,7 @@
                     </div>
                 </div>
                 <div class="path-bottom">
-                    <div class="path-price"><span class="cur">EGP</span> 200 <span class="per">/month</span></div>
+                    <div class="path-price"><span class="cur">$</span>35 <span class="per">/month</span></div>
                     <button class="btn btn-gold select-path"><i class="fas fa-graduation-cap"></i> Choose This Path</button>
                 </div>
             </div>
@@ -446,13 +612,265 @@
                     </div>
                 </div>
                 <div class="path-bottom">
-                    <div class="path-price"><span class="cur">EGP</span> 600 <span class="per">/month</span></div>
+                    <div class="path-price"><span class="cur">$</span>99 <span class="per">/month</span></div>
                     <button class="btn btn-gold select-path"><i class="fas fa-graduation-cap"></i> Choose This Path</button>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<!-- Pricing -->
+<section class="pricing-section" id="pricingSection">
+    <div class="container">
+        <div class="section-header reveal">
+            <span class="section-subtitle">Pricing</span>
+            <h2 class="section-title">Flexible Plans for Every Schedule</h2>
+            <p class="section-desc">Choose your session duration and how many classes per week — transparent pricing with no hidden fees</p>
+        </div>
+
+        <!-- Tabs -->
+        <div class="pricing-tabs reveal">
+            <button class="pricing-tab active" data-group="min30"><i class="fas fa-bolt"></i> 30 Minutes</button>
+            <button class="pricing-tab" data-group="min45"><i class="fas fa-clock"></i> 45 Minutes</button>
+            <button class="pricing-tab" data-group="hr1"><i class="fas fa-hourglass-half"></i> 1 Hour</button>
+        </div>
+
+        <!-- 30 MIN GROUP -->
+        <div class="pricing-group active reveal" id="pg-min30">
+            <div class="pricing-group-header">
+                <div class="pricing-duration-badge"><i class="fas fa-bolt"></i> 30 Minutes Per Class</div>
+                <p class="pricing-group-desc">Quick focused sessions — perfect for consistent daily progress</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-badge-wrap"></div>
+                    <div class="pricing-sessions">1</div>
+                    <div class="pricing-sessions-label">Class / Week</div>
+                    <div class="pricing-divider"></div>
+                    <div class="pricing-duration-tag"><i class="fas fa-clock"></i> 30 min</div>
+                    <div class="pricing-price-wrap">
+                        <div class="pricing-price"><span class="pricing-cur">$</span>18</div>
+                        <div class="pricing-per">per month</div>
+                    </div>
+                    <button class="pricing-cta" onclick="openPricingModal('1 class/week','30 min','$18')"><i class="fas fa-graduation-cap"></i> Enroll Now</button>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-badge-wrap"></div>
+                    <div class="pricing-sessions">2</div>
+                    <div class="pricing-sessions-label">Classes / Week</div>
+                    <div class="pricing-divider"></div>
+                    <div class="pricing-duration-tag"><i class="fas fa-clock"></i> 30 min</div>
+                    <div class="pricing-price-wrap">
+                        <div class="pricing-price"><span class="pricing-cur">$</span>36</div>
+                        <div class="pricing-per">per month</div>
+                    </div>
+                    <button class="pricing-cta" onclick="openPricingModal('2 classes/week','30 min','$36')"><i class="fas fa-graduation-cap"></i> Enroll Now</button>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="pricing-badge-wrap"><span class="pricing-best"><i class="fas fa-crown"></i> Best Value</span></div>
+                    <div class="pricing-sessions">3</div>
+                    <div class="pricing-sessions-label">Classes / Week</div>
+                    <div class="pricing-divider"></div>
+                    <div class="pricing-duration-tag"><i class="fas fa-clock"></i> 30 min</div>
+                    <div class="pricing-price-wrap">
+                        <div class="pricing-price"><span class="pricing-cur">$</span>48</div>
+                        <div class="pricing-per">per month</div>
+                    </div>
+                    <button class="pricing-cta" onclick="openPricingModal('3 classes/week','30 min','$48')"><i class="fas fa-graduation-cap"></i> Enroll Now</button>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-badge-wrap"></div>
+                    <div class="pricing-sessions">4</div>
+                    <div class="pricing-sessions-label">Classes / Week</div>
+                    <div class="pricing-divider"></div>
+                    <div class="pricing-duration-tag"><i class="fas fa-clock"></i> 30 min</div>
+                    <div class="pricing-price-wrap">
+                        <div class="pricing-price"><span class="pricing-cur">$</span>64</div>
+                        <div class="pricing-per">per month</div>
+                    </div>
+                    <button class="pricing-cta" onclick="openPricingModal('4 classes/week','30 min','$64')"><i class="fas fa-graduation-cap"></i> Enroll Now</button>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-badge-wrap"></div>
+                    <div class="pricing-sessions">5</div>
+                    <div class="pricing-sessions-label">Classes / Week</div>
+                    <div class="pricing-divider"></div>
+                    <div class="pricing-duration-tag"><i class="fas fa-clock"></i> 30 min</div>
+                    <div class="pricing-price-wrap">
+                        <div class="pricing-price"><span class="pricing-cur">$</span>75</div>
+                        <div class="pricing-per">per month</div>
+                    </div>
+                    <button class="pricing-cta" onclick="openPricingModal('5 classes/week','30 min','$75')"><i class="fas fa-graduation-cap"></i> Enroll Now</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 45 MIN GROUP -->
+        <div class="pricing-group reveal" id="pg-min45">
+            <div class="pricing-group-header">
+                <div class="pricing-duration-badge"><i class="fas fa-clock"></i> 45 Minutes Per Class</div>
+                <p class="pricing-group-desc">The ideal balance between depth and efficiency</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-badge-wrap"></div>
+                    <div class="pricing-sessions">1</div>
+                    <div class="pricing-sessions-label">Class / Week</div>
+                    <div class="pricing-divider"></div>
+                    <div class="pricing-duration-tag"><i class="fas fa-clock"></i> 45 min</div>
+                    <div class="pricing-price-wrap">
+                        <div class="pricing-price"><span class="pricing-cur">$</span>27</div>
+                        <div class="pricing-per">per month</div>
+                    </div>
+                    <button class="pricing-cta" onclick="openPricingModal('1 class/week','45 min','$27')"><i class="fas fa-graduation-cap"></i> Enroll Now</button>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-badge-wrap"></div>
+                    <div class="pricing-sessions">2</div>
+                    <div class="pricing-sessions-label">Classes / Week</div>
+                    <div class="pricing-divider"></div>
+                    <div class="pricing-duration-tag"><i class="fas fa-clock"></i> 45 min</div>
+                    <div class="pricing-price-wrap">
+                        <div class="pricing-price"><span class="pricing-cur">$</span>48</div>
+                        <div class="pricing-per">per month</div>
+                    </div>
+                    <button class="pricing-cta" onclick="openPricingModal('2 classes/week','45 min','$48')"><i class="fas fa-graduation-cap"></i> Enroll Now</button>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="pricing-badge-wrap"><span class="pricing-best"><i class="fas fa-crown"></i> Best Value</span></div>
+                    <div class="pricing-sessions">3</div>
+                    <div class="pricing-sessions-label">Classes / Week</div>
+                    <div class="pricing-divider"></div>
+                    <div class="pricing-duration-tag"><i class="fas fa-clock"></i> 45 min</div>
+                    <div class="pricing-price-wrap">
+                        <div class="pricing-price"><span class="pricing-cur">$</span>72</div>
+                        <div class="pricing-per">per month</div>
+                    </div>
+                    <button class="pricing-cta" onclick="openPricingModal('3 classes/week','45 min','$72')"><i class="fas fa-graduation-cap"></i> Enroll Now</button>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-badge-wrap"></div>
+                    <div class="pricing-sessions">4</div>
+                    <div class="pricing-sessions-label">Classes / Week</div>
+                    <div class="pricing-divider"></div>
+                    <div class="pricing-duration-tag"><i class="fas fa-clock"></i> 45 min</div>
+                    <div class="pricing-price-wrap">
+                        <div class="pricing-price"><span class="pricing-cur">$</span>84</div>
+                        <div class="pricing-per">per month</div>
+                    </div>
+                    <button class="pricing-cta" onclick="openPricingModal('4 classes/week','45 min','$84')"><i class="fas fa-graduation-cap"></i> Enroll Now</button>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-badge-wrap"></div>
+                    <div class="pricing-sessions">5</div>
+                    <div class="pricing-sessions-label">Classes / Week</div>
+                    <div class="pricing-divider"></div>
+                    <div class="pricing-duration-tag"><i class="fas fa-clock"></i> 45 min</div>
+                    <div class="pricing-price-wrap">
+                        <div class="pricing-price"><span class="pricing-cur">$</span>105</div>
+                        <div class="pricing-per">per month</div>
+                    </div>
+                    <button class="pricing-cta" onclick="openPricingModal('5 classes/week','45 min','$105')"><i class="fas fa-graduation-cap"></i> Enroll Now</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 1 HOUR GROUP -->
+        <div class="pricing-group reveal" id="pg-hr1">
+            <div class="pricing-group-header">
+                <div class="pricing-duration-badge"><i class="fas fa-hourglass-half"></i> 1 Hour Per Class</div>
+                <p class="pricing-group-desc">Full immersive sessions for maximum learning depth</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-badge-wrap"></div>
+                    <div class="pricing-sessions">1</div>
+                    <div class="pricing-sessions-label">Class / Week</div>
+                    <div class="pricing-divider"></div>
+                    <div class="pricing-duration-tag"><i class="fas fa-clock"></i> 60 min</div>
+                    <div class="pricing-price-wrap">
+                        <div class="pricing-price"><span class="pricing-cur">$</span>36</div>
+                        <div class="pricing-per">per month</div>
+                    </div>
+                    <button class="pricing-cta" onclick="openPricingModal('1 class/week','60 min','$36')"><i class="fas fa-graduation-cap"></i> Enroll Now</button>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-badge-wrap"></div>
+                    <div class="pricing-sessions">2</div>
+                    <div class="pricing-sessions-label">Classes / Week</div>
+                    <div class="pricing-divider"></div>
+                    <div class="pricing-duration-tag"><i class="fas fa-clock"></i> 60 min</div>
+                    <div class="pricing-price-wrap">
+                        <div class="pricing-price"><span class="pricing-cur">$</span>64</div>
+                        <div class="pricing-per">per month</div>
+                    </div>
+                    <button class="pricing-cta" onclick="openPricingModal('2 classes/week','60 min','$64')"><i class="fas fa-graduation-cap"></i> Enroll Now</button>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="pricing-badge-wrap"><span class="pricing-best"><i class="fas fa-crown"></i> Best Value</span></div>
+                    <div class="pricing-sessions">3</div>
+                    <div class="pricing-sessions-label">Classes / Week</div>
+                    <div class="pricing-divider"></div>
+                    <div class="pricing-duration-tag"><i class="fas fa-clock"></i> 60 min</div>
+                    <div class="pricing-price-wrap">
+                        <div class="pricing-price"><span class="pricing-cur">$</span>84</div>
+                        <div class="pricing-per">per month</div>
+                    </div>
+                    <button class="pricing-cta" onclick="openPricingModal('3 classes/week','60 min','$84')"><i class="fas fa-graduation-cap"></i> Enroll Now</button>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-badge-wrap"></div>
+                    <div class="pricing-sessions">4</div>
+                    <div class="pricing-sessions-label">Classes / Week</div>
+                    <div class="pricing-divider"></div>
+                    <div class="pricing-duration-tag"><i class="fas fa-clock"></i> 60 min</div>
+                    <div class="pricing-price-wrap">
+                        <div class="pricing-price"><span class="pricing-cur">$</span>112</div>
+                        <div class="pricing-per">per month</div>
+                    </div>
+                    <button class="pricing-cta" onclick="openPricingModal('4 classes/week','60 min','$112')"><i class="fas fa-graduation-cap"></i> Enroll Now</button>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-badge-wrap"></div>
+                    <div class="pricing-sessions">5</div>
+                    <div class="pricing-sessions-label">Classes / Week</div>
+                    <div class="pricing-divider"></div>
+                    <div class="pricing-duration-tag"><i class="fas fa-clock"></i> 60 min</div>
+                    <div class="pricing-price-wrap">
+                        <div class="pricing-price"><span class="pricing-cur">$</span>140</div>
+                        <div class="pricing-per">per month</div>
+                    </div>
+                    <button class="pricing-cta" onclick="openPricingModal('5 classes/week','60 min','$140')"><i class="fas fa-graduation-cap"></i> Enroll Now</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="pricing-savings reveal">
+            <i class="fas fa-shield-alt"></i> All plans include certified instructors · Flexible scheduling · Cancel anytime
+        </div>
+    </div>
+</section>
+
+<!-- Pricing Modal -->
+<div class="modal-overlay" id="pricingModal">
+    <div class="modal">
+        <div class="modal-head">
+            <h3><i class="fas fa-graduation-cap"></i> Enroll in Your Plan</h3>
+            <button class="modal-x" id="closePricingModal"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="modal-body">
+            <div class="booking-details" id="pricingDetails"></div>
+            <p style="color:rgba(255,255,255,0.45);font-size:0.9rem;line-height:1.6;margin-bottom:1.5rem">
+                Send us a WhatsApp message and we'll schedule your first session at a time that works for you.
+            </p>
+        </div>
+        <div class="modal-footer">
+            <a class="wa-btn" id="pricingWaLink" href="#" target="_blank"><i class="fab fa-whatsapp"></i> Book via WhatsApp</a>
+            <p class="modal-note">We'll confirm your schedule within 24 hours</p>
+        </div>
+    </div>
+</div>
 
 <!-- How It Works -->
 <section class="steps-section">
@@ -605,12 +1023,12 @@
 
     /* ===== PATH DATA ===== */
     const pathData={
-        'Quran Memorization':{price:400,duration:'2-4 Years',sessions:'3 / week',desc:'A complete program for memorizing the entire Quran with proper Tajweed.'},
-        'Tajweed Mastery':{price:300,duration:'3-6 Months',sessions:'2 / week',desc:'A specialized course in theoretical and practical Tajweed rules.'},
-        'Memorization Review':{price:250,duration:'Flexible',sessions:'2-3 / week',desc:'A dedicated program for reviewing and solidifying your memorized portions.'},
-        '10 Qira\'at':{price:500,duration:'1-2 Years',sessions:'3 / week',desc:'An advanced course for learning the ten minor and major Qira\'at.'},
-        'Kids Program':{price:200,duration:'Open-ended',sessions:'2 / week',desc:'A dedicated program for children using gamified learning methods.'},
-        'Intensive Review':{price:600,duration:'3 Months',sessions:'Daily sessions',desc:'An intensive program to review the entire Quran in a short time.'}
+        'Quran Memorization':{price:65,duration:'2-4 Years',sessions:'3 / week',desc:'A complete program for memorizing the entire Quran with proper Tajweed.'},
+        'Tajweed Mastery':{price:49,duration:'3-6 Months',sessions:'2 / week',desc:'A specialized course in theoretical and practical Tajweed rules.'},
+        'Memorization Review':{price:39,duration:'Flexible',sessions:'2-3 / week',desc:'A dedicated program for reviewing and solidifying your memorized portions.'},
+        '10 Qira\'at':{price:79,duration:'1-2 Years',sessions:'3 / week',desc:'An advanced course for learning the ten minor and major Qira\'at.'},
+        'Kids Program':{price:35,duration:'Open-ended',sessions:'2 / week',desc:'A dedicated program for children using gamified learning methods.'},
+        'Intensive Review':{price:99,duration:'3 Months',sessions:'Daily sessions',desc:'An intensive program to review the entire Quran in a short time.'}
     };
 
     let selectedPath=null;
@@ -673,18 +1091,46 @@
         const d=pathData[selectedPath]||{price:300,duration:'TBD',sessions:'TBD',desc:'A customized learning program.'};
         document.getElementById('bookingDetails').innerHTML=`
             <div class="booking-row"><span class="bl">Selected Path</span><span class="bv">${selectedPath}</span></div>
-            <div class="booking-row"><span class="bl">Monthly Fee</span><span class="bv">EGP ${d.price}</span></div>
+            <div class="booking-row"><span class="bl">Monthly Fee</span><span class="bv">$${d.price}</span></div>
             <div class="booking-row"><span class="bl">Duration</span><span class="bv">${d.duration}</span></div>
             <div class="booking-row"><span class="bl">Sessions</span><span class="bv">${d.sessions}</span></div>
         `;
         document.getElementById('bookingDesc').textContent=d.desc+' You will be contacted via WhatsApp to schedule convenient times.';
-        const msg=`Hello, I'm interested in booking sessions for "${selectedPath}" with Sheikh Abdurrahman.\n\nDetails:\n- Path: ${selectedPath}\n- Fee: EGP ${d.price}/month\n- Duration: ${d.duration}\n- Sessions: ${d.sessions}\n\nPlease contact me to schedule.`;
+        const msg=`Hello, I'm interested in booking sessions for "${selectedPath}" with Sheikh Abdurrahman.\n\nDetails:\n- Path: ${selectedPath}\n- Fee: $${d.price}/month\n- Duration: ${d.duration}\n- Sessions: ${d.sessions}\n\nPlease contact me to schedule.`;
         document.getElementById('waLink').href=`https://wa.me/01202988181?text=${encodeURIComponent(msg)}`;
         modal.classList.add('active');
         document.body.style.overflow='hidden';
     }
 
-    /* ===== PULSE KEYFRAME ===== */
+    /* ===== PRICING TABS ===== */
+    document.querySelectorAll('.pricing-tab').forEach(tab=>{
+        tab.addEventListener('click',function(){
+            document.querySelectorAll('.pricing-tab').forEach(t=>t.classList.remove('active'));
+            document.querySelectorAll('.pricing-group').forEach(g=>g.classList.remove('active'));
+            this.classList.add('active');
+            document.getElementById('pg-'+this.dataset.group).classList.add('active');
+        });
+    });
+
+    /* ===== PRICING MODAL ===== */
+    const pm=document.getElementById('pricingModal');
+    document.getElementById('closePricingModal').addEventListener('click',()=>{pm.classList.remove('active');document.body.style.overflow=''});
+    pm.addEventListener('click',e=>{if(e.target===pm){pm.classList.remove('active');document.body.style.overflow=''}});
+
+    window.openPricingModal=function(sessions,duration,price){
+        document.getElementById('pricingDetails').innerHTML=`
+            <div class="booking-row"><span class="bl">Sessions</span><span class="bv">${sessions}</span></div>
+            <div class="booking-row"><span class="bl">Duration</span><span class="bv">${duration} per class</span></div>
+            <div class="booking-row"><span class="bl">Monthly Fee</span><span class="bv">${price} / month</span></div>
+            <div class="booking-row"><span class="bl">Instructor</span><span class="bv">Sheikh Abdurrahman</span></div>
+        `;
+        const msg=`Hello, I'd like to enroll in the following plan:\n\n- Sessions: ${sessions}\n- Duration: ${duration} per class\n- Monthly Fee: ${price}\n\nPlease contact me to schedule my sessions. Thank you!`;
+        document.getElementById('pricingWaLink').href=`https://wa.me/01202988181?text=${encodeURIComponent(msg)}`;
+        pm.classList.add('active');
+        document.body.style.overflow='hidden';
+    };
+
+
     const st=document.createElement('style');
     st.textContent='@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}';
     document.head.appendChild(st);
